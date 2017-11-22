@@ -48,6 +48,13 @@ router.get('/login', function(req, res, next) {
   res.render('login');
 });
 
+router.get('/auth/twitter', passport.authenticate('twitter'))
+
+router.get('/auth/twitter/callback', passport.authenticate('twitter', {
+  successRedirect: '/secret',
+  failureRedirect: '/'
+}));
+
 router.get('/signup', function(req, res, next){
   res.render('signup')
 });
@@ -66,6 +73,7 @@ router.post('/signup', passport.authenticate('local-signup', {
 
 router.get('/secret', isLoggedIn, function(req, res, next) {
   res.render('secret', { username : req.user.local.username,
+    twitterName: req.user.twitter.displayName,
     signupDate: req.user.signupDate,
     favorites: req.user.favorites });
 });

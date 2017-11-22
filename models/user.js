@@ -7,6 +7,13 @@ var userSchema = mongoose.Schema({
     password: String
   },
 
+  twitter: {
+    id: String,
+    token: String,
+    displayName: String,
+    username: String
+  },
+
   signupDate : { type: Date, default: Date.now() },
 
   favorites : {
