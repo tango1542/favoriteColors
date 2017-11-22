@@ -70,6 +70,11 @@ router.get('/secret', isLoggedIn, function(req, res, next) {
     favorites: req.user.favorites });
 });
 
+router.get('/logout', function(req, res, next) {
+  req.logout();
+  res.redirect('/')
+})
+
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
